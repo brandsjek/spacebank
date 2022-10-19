@@ -10,13 +10,12 @@ class Product:
     description = None
     def __init__(self, product_name: str, price: int, description: str = None):
         """
-        Initializes the Account object.
+        Initializes the Product object.
 
         Parameters:
-            accountholder (str): The name of the account. Must not start with [-+*], contain whitespace or be 'too numeric' (see utils.py, parse_amount)
-            balance (int): The balance of the account, in cents.
-            last_updated (datetime.datetime): The time when the account was last updated (i.e. when a tx was made), or created.
-            pos_or_neg_since (datetime.datetime): The time when the account last went in the red or the green. Used to warn users for long-standing debts (if enabled)
+            product_name (str): The unique identifier of the product (i.e. EAN code)
+            price (int): The price of the product, in cents (optionally a string, will be parsed to cents)
+            description (str): HUman-friendly description of the product
         """
         self.product_name = product_name
         if type(price) == int:
