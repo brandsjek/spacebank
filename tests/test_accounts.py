@@ -16,6 +16,7 @@ bla                 -36.00 2022-01-19_17:11:25 -@2022-01-19_17:00:43"""
     voorbeelduser_account = actstor['voorbeelduser']
     assert type(voorbeelduser_account) == account.Account
     assert voorbeelduser_account.balance == 16348
+    print(voorbeelduser_account.last_updated)
     assert type(voorbeelduser_account.last_updated) == datetime.datetime
     assert type(voorbeelduser_account.pos_or_neg_since) == datetime.datetime
 

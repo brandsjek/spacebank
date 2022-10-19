@@ -29,9 +29,17 @@ class Account:
         else:
             # convert balance to integer
             self.balance = utils.balance_str_to_int(balance)
-        self.last_updated = last_updated
         self.pos_or_neg_since = pos_or_neg_since
-    
+        if type(last_updated) == str:
+            self.last_updated = datetime.datetime.strptime(last_updated, "%Y-%m-%d_%H:%M:%S")
+        else:
+            self.last_updated = last_updated
+        
+        if type(pos_or_neg_since) == str:
+            self.pos_or_neg_since = datetime.datetime.strptime(pos_or_neg_since[2:], "%Y-%m-%d_%H:%M:%S")
+        else:
+            self.pos_or_neg_since = last_updated
+
     def __str__(self):
         return f"<Account '{self.account_name}' ({self.balance})>"
 
@@ -53,7 +61,7 @@ class AccountStore(store.BaseStore):
                     value = value.rstrip()
                     if value != '':
                         account_line_split.append(value)                
-                new_account = Account(account_line_split[0], account_line_split[1], account_line_split)
+                new_account = Account(account_line_split[0], account_line_split[1], account_line_split[2], account_line_split[3])
                 self._store[account_line_split[0]] = new_account
             linenumber += 1
     
