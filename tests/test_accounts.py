@@ -20,3 +20,8 @@ bla                 -36.00 2022-01-19_17:11:25 -@2022-01-19_17:00:43"""
     assert type(voorbeelduser_account.last_updated) == datetime.datetime
     assert type(voorbeelduser_account.pos_or_neg_since) == datetime.datetime
 
+def test_export():
+    last_updated = datetime.datetime(2022, 1, 1, 12, 13, 37)
+    pos_or_neg_since = datetime.datetime(1999, 1, 2, 12, 13, 37)
+    act = account.Account('voorbeeld', 1337, last_updated, pos_or_neg_since)
+    assert act._to_line() == "voorbeeld +13.37 2022-01-01_12:13:37 +@1999-01-02_12:13:37"
