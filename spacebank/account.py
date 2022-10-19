@@ -31,12 +31,12 @@ class Account:
             self.balance = utils.balance_str_to_int(balance)
         self.pos_or_neg_since = pos_or_neg_since
         if type(last_updated) == str:
-            self.last_updated = datetime.datetime.strptime(last_updated, "%Y-%m-%d_%H:%M:%S")
+            self.last_updated = utils.store_timestring_to_datetime(last_updated)
         else:
             self.last_updated = last_updated
         
         if type(pos_or_neg_since) == str:
-            self.pos_or_neg_since = datetime.datetime.strptime(pos_or_neg_since[2:], "%Y-%m-%d_%H:%M:%S")
+            self.pos_or_neg_since = utils.store_timestring_to_datetime(pos_or_neg_since[2:])
         else:
             self.pos_or_neg_since = last_updated
 
