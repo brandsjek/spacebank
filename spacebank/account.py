@@ -40,6 +40,13 @@ class Account:
         else:
             self.pos_or_neg_since = last_updated
 
+    def _to_line(self):
+        if self.balance >= 0:
+            plus_minus = '+'
+        else:
+            plus_minus = '-'
+        return f"{self.account_name} {plus_minus}{abs(self.balance)} {utils.datetime_to_store_timestring(self.last_updated)} {plus_minus}@{utils.datetime_to_store_timestring(self.pos_or_neg_since)}"
+
     def __str__(self):
         return f"<Account '{self.account_name}' ({self.balance})>"
 

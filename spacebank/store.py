@@ -11,6 +11,12 @@ class BaseStore:
     def _read_store():
         pass
 
+    def _write_store():
+        with open(self.store_filename) as output_store:
+            for store_item in _store.values():
+                output_store.write(store_item._to_line())
+                output_store.write('\n')
+
     def __repr__(self):
         return f"<BaseStore containing {len(self._store)} entries>"
     

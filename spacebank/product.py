@@ -28,6 +28,9 @@ class Product:
     
     def __str__(self):
         return f"<Product '{self.product_name}' ({self.price})>"
+    
+    def _to_line(self):
+        return f"{self.product_name} {self.price} {self.description}"
 
 
 
