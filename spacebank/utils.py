@@ -1,4 +1,5 @@
 import re
+import datetime
 
 # generic functions, primarily for validating/parsing input
 
@@ -82,4 +83,10 @@ def balance_str_to_int(balance_value: str):
         return -absolute_value
     else:
         return absolute_value
+
+def datetime_to_store_timestring(dt: datetime.datetime):
+    return dt.strftime("%Y-%m-%d_%H:%M:%S")
+
+def store_timestring_to_datetime(dt: str):
+    return datetime.datetime.strptime(dt, "%Y-%m-%d_%H:%M:%S")
 
