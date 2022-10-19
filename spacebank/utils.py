@@ -90,3 +90,26 @@ def datetime_to_store_timestring(dt: datetime.datetime):
 def store_timestring_to_datetime(dt: str):
     return datetime.datetime.strptime(dt, "%Y-%m-%d_%H:%M:%S")
 
+def cents_to_decimal_string(cents: int, absolute = True):
+    positive = True
+    if cents < 0:
+        positive = False
+    cents = abs(cents)
+
+    if cents < 10:
+        value = f'0.0{str(cents)}'        
+    elif cents < 100:
+        value = f'0.{str(cents)}'
+    else:
+        cents = str(cents)
+        s_cents = cents[-2:]
+        s_whole = cents[:-2]
+        value = f'{s_whole}.{s_cents}'
+
+    if absolute:
+        return value
+    else:
+        if positive:
+            return value
+        else:
+            return f'-{value}'

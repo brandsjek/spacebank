@@ -23,3 +23,17 @@ def test_timestring_datetime_conversion():
     sample_timestring = '2022-10-09_12:13:37'
     assert utils.datetime_to_store_timestring(sample_dt) == sample_timestring
     assert utils.store_timestring_to_datetime(sample_timestring) == sample_dt
+
+def test_cents_int_to_decimal_string():
+    assert utils.cents_to_decimal_string(1337) == "13.37"
+    assert utils.cents_to_decimal_string(13337) == "133.37"
+    assert utils.cents_to_decimal_string(100000) == "1000.00"
+    assert utils.cents_to_decimal_string(1) == "0.01"
+    assert utils.cents_to_decimal_string(10) == "0.10"
+
+    assert utils.cents_to_decimal_string(-100, False) == "-1.00"
+    assert utils.cents_to_decimal_string(-1337, False) == "-13.37"
+    
+    # negative digits, with absolute=True
+    assert utils.cents_to_decimal_string(-100) == "1.00"
+    assert utils.cents_to_decimal_string(-1337) == "13.37"
