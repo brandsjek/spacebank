@@ -12,7 +12,7 @@ bla                 -36.00 2022-01-19_17:11:25 -@2022-01-19_17:00:43"""
     randomfilename = f"/tmp/spacebanktest{randomnumber}"
     with open(randomfilename, 'w') as samplefileoutput:
         samplefileoutput.write(accountfile)
-    actstor = account.AccountStore(filename=randomfilename)
+    actstor = account.AccountStore(store_filename=randomfilename)
     voorbeelduser_account = actstor['voorbeelduser']
     assert type(voorbeelduser_account) == account.Account
     assert voorbeelduser_account.balance == 16348

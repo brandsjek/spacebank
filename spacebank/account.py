@@ -1,7 +1,7 @@
 import os.path
 import datetime
 import re
-from . import utils
+from . import utils, store
 import logging
 
 class Account:
@@ -37,16 +37,8 @@ class Account:
 
 
 
-class AccountStore:
-    _accounts = {}
-    store_filename = None
-    def __init__(self, filename="spacebank.accounts"):
-        if not os.path.exists(filename):
-            raise FileNotFoundError(f"Account storage '{filename}' does not exist")
-        self.store_filename = filename
-        self.read_account_store()
-    
-    def read_account_store(self):
+class AccountStore(store.BaseStore):    
+    def _read_store(self):
         linenumber = 1
         with open(self.store_filename) as f_accounts:
             logging.info(f"Opening account store @ '{self.store_filename}'")
@@ -62,15 +54,8 @@ class AccountStore:
                     if value != '':
                         account_line_split.append(value)                
                 new_account = Account(account_line_split[0], account_line_split[1], account_line_split)
-                self._accounts[account_line_split[0]] = new_account
+                self._store[account_line_split[0]] = new_account
             linenumber += 1
     
     def __repr__(self):
-        return f"<AccountStore containing {len(self._accounts)} accounts>"
-    
-    def __getitem__(self, val):
-        if type(val) != str:
-            raise ValueError("Invalid slice")
-        if val not in self._accounts:
-            raise KeyError(val)
-        return self._accounts[val]
+        return f"<AccountStore containing {len(self._store)} accounts>"
